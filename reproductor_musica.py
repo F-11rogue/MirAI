@@ -335,8 +335,13 @@ class ReproductorMusica:
                     f"No se pudo reproducir el archivo:\n{e}"
                 )
 
-    def _reproducir_seleccion(self, event) -> None:
-        """Maneja el doble clic para reproducir una canción."""
+    def _reproducir_seleccion(self, event: tk.Event) -> None:
+        """
+        Maneja el doble clic para reproducir una canción.
+        
+        Args:
+            event: Evento de tkinter generado por el doble clic
+        """
         seleccion = self.lista_canciones.curselection()
         if seleccion:
             self._reproducir_indice(seleccion[0])
@@ -360,7 +365,12 @@ class ReproductorMusica:
         self.etiqueta_cancion.config(text="Reproducción detenida")
 
     def siguiente(self) -> None:
-        """Reproduce la siguiente canción en la lista."""
+        """
+        Reproduce la siguiente canción en la lista.
+        
+        Si no hay canción actual (cancion_actual == -1), reproduce la primera canción.
+        Si está en la última canción, vuelve a la primera (ciclo circular).
+        """
         if self.lista_reproduccion:
             nuevo_indice = (self.cancion_actual + 1) % len(self.lista_reproduccion)
             self._reproducir_indice(nuevo_indice)
