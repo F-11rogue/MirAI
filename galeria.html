@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galería de trabajos de Dnails. Diseños exclusivos de uñas, nail art y tendencias.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dnails-medellin.com/galeria.html">
+    <meta property="og:title" content="Galería de Diseños | Dnails Bogotá">
+    <meta property="og:description" content="Explora nuestra galería 3D con los mejores diseños de uñas.">
+    <meta property="og:image" content="assets/diseno-exclusivo.jpeg">
+
+    <title>Galería | Dnails Bogotá</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 101, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(197, 160, 101, 0.8); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .gallery-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+        }
+        
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, #fdf2f8 0%, #f3e8ff 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        #gl-gallery {
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+        
+        #gl-gallery.grabbing {
+            cursor: grabbing;
+        }
+        
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #c5a065;
+            color: #c5a065;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-nav:hover {
+            background: #c5a065;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 15px 35px rgba(197, 160, 101, 0.3);
+        }
+        
+        .gallery-nav.prev {
+            left: 20px;
+        }
+        
+        .gallery-nav.next {
+            right: 20px;
+        }
+        
+        .gallery-info {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 16px 32px;
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            border: 1px solid #dcb4b4;
+            z-index: 20;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #2c2c2c;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-info.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(197, 160, 101, 0.2);
+            border-top: 4px solid #c5a065;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: 2px solid #dcb4b4;
+            background: white;
+            color: #2c2c2c;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .filter-btn:hover {
+            background: #dcb4b4;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn.active {
+            background: #c5a065;
+            color: white;
+            border-color: #c5a065;
+        }
+        
+        .controls-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 25;
+        }
+        
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #c5a065;
+            color: #c5a065;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-btn:hover {
+            background: #c5a065;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c5a065, #dcb4b4);
+            transition: width 0.3s ease;
+            z-index: 25;
+        }
+        
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fullscreen-modal.active {
+            display: flex;
+        }
+        
+        .fullscreen-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .fullscreen-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .fullscreen-close:hover {
+            transform: scale(1.2);
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #c5a065;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0.5);
+            }
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dnails-primary': '#dcb4b4',
+                        'dnails-primary-dark': '#c09595',
+                        'dnails-secondary': '#fdf2f8',
+                        'dnails-dark': '#2c2c2c',
+                        'dnails-gold': '#c5a065',
+                        'dnails-gold-light': '#e5c590',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dnails-secondary font-sans text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Experiencias</a>
+                    <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Servicios</a>
+                    <a href="galeria.html" class="text-dnails-gold font-bold transition duration-300 text-sm uppercase tracking-wide">Galería</a>
+                    <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Testimonios</a>
+                    <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Preguntas</a>
+                    <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide">Agendar Cita</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur shadow-lg absolute top-full left-0 right-0 py-4 px-4">
+            <div class="flex flex-col gap-4">
+                <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Inicio</a>
+                <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Experiencias</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Servicios</a>
+                <a href="galeria.html" class="text-dnails-gold font-bold transition text-sm uppercase tracking-wide">Galería</a>
+                <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Testimonios</a>
+                <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Preguntas</a>
+                <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide text-center">Agendar Cita</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-24 bg-white overflow-hidden min-h-screen flex flex-col justify-center relative">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 left-0 -m-40 w-96 h-96 bg-dnails-primary rounded-full blur-[100px] opacity-10 animate-pulse"></div>
+        <div class="absolute bottom-0 right-0 -m-32 w-80 h-80 bg-dnails-gold rounded-full blur-[100px] opacity-10 animate-pulse delay-1000"></div>
+
+        <div class="max-w-6xl mx-auto px-4 text-center pt-10 relative z-10">
+            <h2 class="text-4xl font-serif text-dnails-dark mb-4">Nuestro Trabajo</h2>
+            <p class="text-gray-500 mb-8 max-w-lg mx-auto">Explora nuestra galería 3D para ver diseños exclusivos y tendencias únicas.</p>
+            <p class="text-gray-400 text-sm mt-2"><i class="fa-solid fa-hand-pointer animate-bounce mr-2"></i>Arrastra para explorar la galería 3D</p>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="manicure">Manicura</button>
+                <button class="filter-btn" data-filter="cejas">Cejas</button>
+            </div>
+        </div>
+        
+        <!-- 3D Circular Gallery Container with Frame -->
+        <div class="relative w-full max-w-5xl mx-auto mt-8 px-4">
+             <!-- Frame Border -->
+            <div class="absolute inset-4 border border-dnails-gold/30 rounded-xl pointer-events-none z-20"></div>
+            <div class="absolute -inset-1 bg-gradient-to-r from-dnails-primary to-dnails-gold opacity-20 blur-lg rounded-xl -z-10"></div>
+            
+            <div class="gallery-container shadow-2xl border border-white/50">
+                <div class="gallery-loader" id="loader">
+                    <div class="loading-spinner"></div>
+                </div>
+                
+                <!-- Controls Panel -->
+                <div class="controls-panel">
+                    <button class="control-btn" id="pauseBtn" title="Pausar rotación">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="control-btn" id="speedBtn" title="Velocidad">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </button>
+                    <button class="control-btn" id="fullscreenBtn" title="Pantalla completa">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <button class="control-btn" id="soundBtn" title="Sonido">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+                
+                <div id="gl-gallery"></div>
+                
+                <button class="gallery-nav prev" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-nav next" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="gallery-info" id="galleryInfo"></div>
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <div class="fullscreen-content">
+            <span class="fullscreen-close" id="fullscreenClose">&times;</span>
+            <img id="fullscreenImage" src="" alt="" style="max-width: 100%; max-height: 100%; border-radius: 10px;">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dnails-dark text-gray-400 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 flex flex-col items-center md:items-start">
+                    <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-12 w-auto mb-3 opacity-90 hover:opacity-100 transition-opacity">
+                    <p class="text-sm">Estudio de arte en uñas y belleza</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-sm mb-2">Contacto: +57 310 342 3456</p>
+                    <p class="text-sm mb-2">Horario: Lunes a Sábado 9:00 AM - 6:00 PM</p>
+                    <p class="text-sm">Ubicación: Bogotá, Colombia</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm">
+                <p>&copy; 2025 Dnails por Diana Ortiz. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/573103423456?text=¡Hola!%20Quiero%20agendar%20una%20cita%20en%20Dnails" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition hover:scale-110 animate-float">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script type="module">
+        import { OptimizedCircularGallery } from './gallery.js';
+
+        // Initialize gallery when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = [
+                { image: 'assets/diseno-exclusivo.jpeg', text: 'Diseño Exclusivo', category: 'cejas' },
+                { image: 'assets/arte-unas.jpeg', text: 'Arte en Uñas', category: 'manicure' },
+                { image: 'assets/cuidado-total.jpeg', text: 'Cuidado Total', category: 'manicure' },
+                { image: 'assets/estilo-unico.jpeg', text: 'Estilo Único', category: 'cejas' },
+                { image: 'assets/colores-vibrantes.jpeg', text: 'Colores Vibrantes', category: 'manicure' },
+                { image: 'assets/detalles-perfectos.jpeg', text: 'Detalles Perfectos', category: 'manicure' },
+                { image: 'assets/ojos.jpeg', text: 'Mirada Impactante', category: 'cejas' },
+                { image: 'assets/serviciocejas.jpeg', text: 'Cejas Perfectas', category: 'cejas' },
+                { image: 'assets/uñapiel.jpeg', text: 'Salud y Belleza', category: 'manicure' },
+                { image: 'assets/uñas.jpeg', text: 'Manicura Clásica', category: 'manicure' },
+                { image: 'assets/uñas2.jpeg', text: 'Tendencia Actual', category: 'manicure' },
+                { image: 'assets/uñasbeige.jpeg', text: 'Tonos Nude', category: 'manicure' },
+                { image: 'assets/uñasblancas.jpeg', text: 'Elegancia Pura', category: 'manicure' },
+                { image: 'assets/uñasmoradas.jpeg', text: 'Toque de Color', category: 'manicure' },
+                { image: 'assets/uñasnegras.png', text: 'Estilo Dark', category: 'manicure' },
+                { image: 'assets/uñasroja.jpeg', text: 'Rojo Pasión', category: 'manicure' },
+                { image: 'assets/uñasrojitas.jpeg', text: 'Detalles Rojos', category: 'manicure' },
+                { image: 'assets/uñasrosa.jpeg', text: 'Rosa Delicado', category: 'manicure' }
+            ];
+            
+            // Add original index to each item
+            galleryItems.forEach((item, index) => {
+                item.originalIndex = index;
+            });
+            
+            const gallery = new OptimizedCircularGallery('gl-gallery', galleryItems);
+        });
+    </script>
+</body>
+</html>

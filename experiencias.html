@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paquetes y experiencias exclusivas en Dnails. Ahorra con nuestros combos de manicure, pedicure y diseño de mirada.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dnails-medellin.com/experiencias.html">
+    <meta property="og:title" content="Experiencias y Promociones | Dnails Bogotá">
+    <meta property="og:description" content="Descubre nuestros paquetes exclusivos: Reina Total, Diamante y más.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1632922267756-9b71242b1592?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <title>Experiencias | Dnails Bogotá</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dnails-primary': '#dcb4b4',
+                        'dnails-primary-dark': '#c09595',
+                        'dnails-secondary': '#fdf2f8',
+                        'dnails-dark': '#2c2c2c',
+                        'dnails-gold': '#c5a065',
+                        'dnails-gold-light': '#e5c590',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dnails-secondary font-sans text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="experiencias.html" class="text-dnails-gold font-bold transition duration-300 text-sm uppercase tracking-wide">Experiencias</a>
+                    <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Servicios</a>
+                    <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Galería</a>
+                    <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Testimonios</a>
+                    <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Preguntas</a>
+                    <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide">Agendar Cita</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur shadow-lg absolute top-full left-0 right-0 py-4 px-4">
+            <div class="flex flex-col gap-4">
+                <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Inicio</a>
+                <a href="experiencias.html" class="text-dnails-gold font-bold transition text-sm uppercase tracking-wide">Experiencias</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Servicios</a>
+                <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Galería</a>
+                <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Testimonios</a>
+                <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Preguntas</a>
+                <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide text-center">Agendar Cita</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Experiences Section -->
+    <section id="experiencias" class="py-24 bg-dnails-secondary relative overflow-hidden min-h-screen">
+        <div class="absolute top-0 right-0 -m-24 w-24 h-24 bg-dnails-gold rounded-full blur-2xl opacity-5 z-0"></div>
+        <div class="absolute bottom-0 left-0 -m-24 w-24 h-24 bg-dnails-gold rounded-full blur-2xl opacity-5 z-0"></div>
+        <div class="max-w-6xl mx-auto px-4 relative z-10 pt-10">
+            <div class="text-center mb-16">
+                <span class="text-dnails-gold tracking-[0.2em] uppercase text-xs font-bold">Ofertas Especiales</span>
+                <h2 class="text-4xl lg:text-5xl font-serif mt-3 mb-4 text-dnails-dark">Experiencias Dnails</h2>
+                <p class="text-gray-500 max-w-xl mx-auto font-light">Paquetes diseñados para maximizar tu belleza y ahorrar en el proceso.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Pack 1 -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 relative overflow-hidden group flex flex-col">
+                    <div class="absolute top-4 right-4 bg-dnails-gold text-dnails-dark text-xs font-bold px-3 py-1 rounded-full z-10">
+                        Popular
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/cuidado-total.jpeg" alt="Reina Total Pack" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="mb-4">
+                            <span class="text-xs text-dnails-gold font-bold uppercase tracking-wide">Experiencia Premium</span>
+                            <h3 class="font-serif text-2xl text-dnails-dark mt-1">Reina Total</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Manicure, pedicure, laminado de cejas y lifting de pestañas en un solo servicio completo.</p>
+                        <div class="mb-6">
+                            <div class="space-y-3 text-sm text-gray-600">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Manicure + Pedicure</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Laminado de Cejas</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Lifting de Pestañas</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Diseño + Depilación</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="flex justify-between items-end mb-4">
+                                <div>
+                                    <span class="text-xs text-red-400 line-through block">Antes $150.000</span>
+                                    <span class="text-3xl font-serif font-bold text-dnails-dark">$135k</span>
+                                </div>
+                                <div class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">Ahorras $15k</div>
+                            </div>
+                            <a href="agendar.html" class="w-full px-4 py-3 bg-dnails-gold text-dnails-dark rounded-lg hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide block text-center">
+                                Reservar Pack
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pack 2 -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 relative overflow-hidden group flex flex-col">
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/diseno-exclusivo.jpeg" alt="Diamante Pack" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="mb-4">
+                            <span class="text-xs text-dnails-gold font-bold uppercase tracking-wide">Exclusivo</span>
+                            <h3 class="font-serif text-2xl text-dnails-dark mt-1">Diamante</h3>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-6 flex-grow">Todo incluido: uñas, cejas, pestañas y servicios premium.</p>
+                        <div class="mb-6">
+                            <div class="space-y-3 text-sm text-gray-600">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Reina Total</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Tratamiento Facial</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Maquillaje Semi-permanente</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Sesión de Brillo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="flex justify-between items-end mb-4">
+                                <span class="text-3xl font-serif font-bold text-dnails-dark">$220k</span>
+                            </div>
+                            <a href="agendar.html" class="w-full px-4 py-3 bg-dnails-gold text-dnails-dark rounded-lg hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide block text-center">
+                                Reservar Pack
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pack 3 -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 relative overflow-hidden group flex flex-col">
+                    <div class="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg w-12 h-12 flex items-center justify-center text-dnails-gold">
+                        <i class="fa-solid fa-box-open text-xl"></i>
+                    </div>
+                    <div class="h-48 overflow-hidden">
+                        <img src="assets/uñasrosa.jpeg" alt="Press On & Go" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="mb-4">
+                            <span class="text-xs text-dnails-gold font-bold uppercase tracking-wide">Producto Físico</span>
+                            <h3 class="font-serif text-2xl text-dnails-dark mt-1">Press On & Go</h3>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-6 flex-grow">Uñas listas para usar, enviadas directamente a tu puerta (Producto Físico).</p>
+                        <div class="mb-6">
+                            <div class="space-y-3 text-sm text-gray-600">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Set Personalizado a Medida</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Kit de Aplicación Incluido</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-check text-green-500"></i>
+                                    <span>Duración 2-3 semanas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-100 pt-4">
+                            <div class="flex justify-between items-end mb-4">
+                                <span class="text-3xl font-serif font-bold text-dnails-dark">$80k</span>
+                            </div>
+                            <a href="agendar.html" class="w-full px-4 py-3 bg-dnails-gold text-dnails-dark rounded-lg hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide block text-center">
+                                Lo Quiero Todo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dnails-dark text-gray-400 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 flex flex-col items-center md:items-start">
+                    <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-12 w-auto mb-3 opacity-90 hover:opacity-100 transition-opacity">
+                    <p class="text-sm">Estudio de arte en uñas y belleza</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-sm mb-2">Contacto: +57 310 342 3456</p>
+                    <p class="text-sm mb-2">Horario: Lunes a Sábado 9:00 AM - 6:00 PM</p>
+                    <p class="text-sm">Ubicación: Bogotá, Colombia</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm">
+                <p>&copy; 2025 Dnails por Diana Ortiz. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/573103423456?text=¡Hola!%20Quiero%20agendar%20una%20cita%20en%20Dnails" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition hover:scale-110 animate-float">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

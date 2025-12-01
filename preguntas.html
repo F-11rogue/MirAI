@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Preguntas frecuentes sobre Dnails. Métodos de pago, duración de servicios y cuidados.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dnails-medellin.com/preguntas.html">
+    <meta property="og:title" content="Preguntas Frecuentes | Dnails Bogotá">
+    <meta property="og:description" content="Resuelve tus dudas sobre nuestros servicios y atención.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1632922267756-9b71242b1592?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <title>Preguntas Frecuentes | Dnails Bogotá</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dnails-primary': '#dcb4b4',
+                        'dnails-primary-dark': '#c09595',
+                        'dnails-secondary': '#fdf2f8',
+                        'dnails-dark': '#2c2c2c',
+                        'dnails-gold': '#c5a065',
+                        'dnails-gold-light': '#e5c590',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dnails-secondary font-sans text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Experiencias</a>
+                    <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Servicios</a>
+                    <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Galería</a>
+                    <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Testimonios</a>
+                    <a href="preguntas.html" class="text-dnails-gold font-bold transition duration-300 text-sm uppercase tracking-wide">Preguntas</a>
+                    <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide">Agendar Cita</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur shadow-lg absolute top-full left-0 right-0 py-4 px-4">
+            <div class="flex flex-col gap-4">
+                <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Inicio</a>
+                <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Experiencias</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Servicios</a>
+                <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Galería</a>
+                <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Testimonios</a>
+                <a href="preguntas.html" class="text-dnails-gold font-bold transition text-sm uppercase tracking-wide">Preguntas</a>
+                <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide text-center">Agendar Cita</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-white min-h-screen">
+        <div class="max-w-4xl mx-auto px-4 pt-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-serif text-dnails-dark">Preguntas Frecuentes</h2>
+            </div>
+            <div class="space-y-4">
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>¿Qué métodos de pago aceptan?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+                    </summary>
+                    <p class="text-gray-600 text-sm mt-3 pl-2 border-l-2 border-dnails-primary">Aceptamos efectivo, transferencias bancarias y pagos por Nequi o Daviplata.</p>
+                </details>
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>¿Cuánto tiempo duran los servicios?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+                    </summary>
+                    <p class="text-gray-600 text-sm mt-3 pl-2 border-l-2 border-dnails-primary">Depende del servicio. Un semipermanente toma aprox. 1 hora, mientras que un set de acrílico o un lifting de pestañas puede tomar entre 1.5 a 2 horas.</p>
+                </details>
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>¿Cómo debo cuidar mis uñas/pestañas?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+                    </summary>
+                    <p class="text-gray-600 text-sm mt-3 pl-2 border-l-2 border-dnails-primary">Te daremos instrucciones detalladas al finalizar tu servicio. Generalmente, evitar el agua prolongada y usar productos recomendados ayuda a prolongar la duración.</p>
+                </details>
+                <details class="group bg-gray-50 p-4 rounded-lg cursor-pointer">
+                    <summary class="flex justify-between items-center font-medium list-none">
+                        <span>¿Hacen domicilios?</span>
+                        <span class="transition group-open:rotate-180"><i class="fa-solid fa-chevron-down text-xs"></i></span>
+                    </summary>
+                    <p class="text-gray-600 text-sm mt-3 pl-2 border-l-2 border-dnails-primary">Por el momento atendemos exclusivamente en nuestro estudio para garantizar la mejor iluminación y acceso a todas nuestras herramientas.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dnails-dark text-gray-400 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 flex flex-col items-center md:items-start">
+                    <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-12 w-auto mb-3 opacity-90 hover:opacity-100 transition-opacity">
+                    <p class="text-sm">Estudio de arte en uñas y belleza</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-sm mb-2">Contacto: +57 310 342 3456</p>
+                    <p class="text-sm mb-2">Horario: Lunes a Sábado 9:00 AM - 6:00 PM</p>
+                    <p class="text-sm">Ubicación: Bogotá, Colombia</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm">
+                <p>&copy; 2025 Dnails por Diana Ortiz. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/573103423456?text=¡Hola!%20Quiero%20agendar%20una%20cita%20en%20Dnails" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition hover:scale-110 animate-float">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

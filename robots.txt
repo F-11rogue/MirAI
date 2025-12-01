@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://dnails-diana.com/sitemap.xml
+
+# Bloquear acceso a archivos de sistema o privados si los hubiera
+Disallow: /private/
+Disallow: /assets/private/

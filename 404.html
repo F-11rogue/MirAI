@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página no encontrada - Dnails Bogotá">
+    <title>Página no encontrada | Dnails Bogotá</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dnails-primary': '#dcb4b4',
+                        'dnails-primary-dark': '#c09595',
+                        'dnails-secondary': '#fdf2f8',
+                        'dnails-dark': '#2c2c2c',
+                        'dnails-gold': '#c5a065',
+                        'dnails-gold-light': '#e5c590',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dnails-secondary font-sans text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Experiencias</a>
+                    <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Servicios</a>
+                    <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Galería</a>
+                    <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Testimonios</a>
+                    <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Preguntas</a>
+                    <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide">Agendar Cita</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 404 Content -->
+    <section class="flex-grow flex items-center justify-center py-20">
+        <div class="text-center px-4">
+            <h1 class="text-9xl font-serif font-bold text-dnails-primary opacity-20 select-none">404</h1>
+            <div class="-mt-12 relative z-10">
+                <h2 class="text-3xl md:text-4xl font-serif text-dnails-dark mb-4">Página no encontrada</h2>
+                <p class="text-gray-600 mb-8 max-w-md mx-auto">Lo sentimos, la página que buscas no existe o ha sido movida. Tal vez quieras volver al inicio o agendar una cita.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" class="px-8 py-3 bg-dnails-dark text-white rounded-full hover:bg-gray-800 transition text-sm font-bold uppercase tracking-wide">
+                        Volver al Inicio
+                    </a>
+                    <a href="agendar.html" class="px-8 py-3 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold uppercase tracking-wide">
+                        Agendar Cita
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dnails-dark text-gray-400 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2025 Dnails por Diana Ortiz. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

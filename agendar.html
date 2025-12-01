@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agenda tu cita en Dnails Bogotá. Reserva servicios de uñas, pestañas y cejas fácilmente.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dnails-medellin.com/agendar.html">
+    <meta property="og:title" content="Agendar Cita | Dnails Bogotá">
+    <meta property="og:description" content="Reserva tu espacio para consentirte.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1632922267756-9b71242b1592?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+
+    <title>Agendar Cita | Dnails Bogotá</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dnails-primary': '#dcb4b4',
+                        'dnails-primary-dark': '#c09595',
+                        'dnails-secondary': '#fdf2f8',
+                        'dnails-dark': '#2c2c2c',
+                        'dnails-gold': '#c5a065',
+                        'dnails-gold-light': '#e5c590',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dnails-secondary font-sans text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Experiencias</a>
+                    <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Servicios</a>
+                    <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Galería</a>
+                    <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Testimonios</a>
+                    <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Preguntas</a>
+                    <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide">Agendar Cita</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur shadow-lg absolute top-full left-0 right-0 py-4 px-4">
+            <div class="flex flex-col gap-4">
+                <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Inicio</a>
+                <a href="experiencias.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Experiencias</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Servicios</a>
+                <a href="galeria.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Galería</a>
+                <a href="testimonios.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Testimonios</a>
+                <a href="preguntas.html" class="text-gray-600 hover:text-[#dcb4b4] transition text-sm uppercase tracking-wide">Preguntas</a>
+                <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide text-center">Agendar Cita</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Section -->
+    <section id="agendar" class="py-24 bg-white min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full mx-auto px-4 pt-10">
+            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-serif text-dnails-dark mb-2">Reserva tu Cita</h2>
+                    <p class="text-gray-500 text-sm">Completa el formulario y te contactaremos por WhatsApp para confirmar.</p>
+                </div>
+                <form id="bookingForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nombre</label>
+                        <input type="text" id="bookingName" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-dnails-primary transition text-sm" placeholder="Tu nombre" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Servicio</label>
+                        <select id="bookingService" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-dnails-primary transition text-sm">
+                            <option>Manicura Semipermanente</option>
+                            <option>Acrílico Esculpido</option>
+                            <option>Lifting de Pestañas</option>
+                            <option>Diseño de Cejas</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Fecha Preferida</label>
+                        <input type="date" id="bookingDate" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-dnails-primary transition text-sm" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Hora Preferida</label>
+                        <input type="time" id="bookingTime" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-dnails-primary transition text-sm" required>
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-dnails-dark text-white rounded-lg hover:bg-gray-800 transition font-bold text-sm uppercase tracking-wide mt-4">
+                        Enviar Solicitud
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dnails-dark text-gray-400 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0 flex flex-col items-center md:items-start">
+                    <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-12 w-auto mb-3 opacity-90 hover:opacity-100 transition-opacity">
+                    <p class="text-sm">Estudio de arte en uñas y belleza</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-sm mb-2">Contacto: +57 310 342 3456</p>
+                    <p class="text-sm mb-2">Horario: Lunes a Sábado 9:00 AM - 6:00 PM</p>
+                    <p class="text-sm">Ubicación: Bogotá, Colombia</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm">
+                <p>&copy; 2025 Dnails por Diana Ortiz. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/573103423456?text=¡Hola!%20Quiero%20agendar%20una%20cita%20en%20Dnails" target="_blank" class="fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition hover:scale-110 animate-float">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Simple booking form handler
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('bookingName').value;
+            const service = document.getElementById('bookingService').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            
+            const message = `Hola, soy ${name}. Me gustaría agendar una cita para ${service} el día ${date} a las ${time}.`;
+            const whatsappUrl = `https://wa.me/573103423456?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>

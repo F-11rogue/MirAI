@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Política de Privacidad de Dnails Bogotá.">
+    <title>Política de Privacidad | Dnails Bogotá</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dnails-primary': '#dcb4b4',
+                        'dnails-primary-dark': '#c09595',
+                        'dnails-secondary': '#fdf2f8',
+                        'dnails-dark': '#2c2c2c',
+                        'dnails-gold': '#c5a065',
+                        'dnails-gold-light': '#e5c590',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dnails-secondary font-sans text-gray-900 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="assets/logo.jpeg" alt="Dnails Logo" class="h-16 w-auto hover:scale-105 transition-transform duration-300 drop-shadow-sm">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-[#dcb4b4] transition duration-300 text-sm uppercase tracking-wide">Inicio</a>
+                    <a href="agendar.html" class="px-4 py-2 bg-dnails-gold text-dnails-dark rounded-full hover:bg-dnails-gold-light transition text-sm font-bold tracking-wide">Agendar Cita</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Privacy Policy Content -->
+    <section class="py-24 bg-white min-h-screen">
+        <div class="max-w-3xl mx-auto px-4 pt-10">
+            <h1 class="text-3xl md:text-4xl font-serif text-dnails-dark mb-8">Política de Privacidad</h1>
+            
+            <div class="prose prose-pink max-w-none text-gray-600">
+                <p class="mb-4">En Dnails Bogotá, valoramos tu privacidad y nos comprometemos a proteger tus datos personales. Esta política explica cómo manejamos tu información.</p>
+
+                <h3 class="text-xl font-bold text-dnails-dark mt-6 mb-3">1. Información que Recopilamos</h3>
+                <p class="mb-4">Recopilamos información básica necesaria para agendar tus citas, como tu nombre y número de teléfono, principalmente a través de WhatsApp.</p>
+
+                <h3 class="text-xl font-bold text-dnails-dark mt-6 mb-3">2. Uso de la Información</h3>
+                <p class="mb-4">Utilizamos tus datos exclusivamente para:</p>
+                <ul class="list-disc pl-5 mb-4 space-y-2">
+                    <li>Confirmar y recordar tus citas.</li>
+                    <li>Informarte sobre promociones especiales (solo si aceptas recibirlas).</li>
+                    <li>Mejorar nuestros servicios.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-dnails-dark mt-6 mb-3">3. Protección de Datos</h3>
+                <p class="mb-4">No compartimos tu información con terceros. Tus datos se mantienen confidenciales y seguros.</p>
+
+                <h3 class="text-xl font-bold text-dnails-dark mt-6 mb-3">4. Contacto</h3>
+                <p class="mb-4">Si tienes preguntas sobre nuestra política de privacidad, puedes contactarnos a través de nuestro WhatsApp o en el estudio.</p>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <a href="index.html" class="text-dnails-primary hover:text-dnails-primary-dark font-bold transition">← Volver al Inicio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dnails-dark text-gray-400 py-10 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2025 Dnails por Diana Ortiz. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
