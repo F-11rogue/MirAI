@@ -188,10 +188,12 @@ def retry_on_error(max_retries: int = 3, delay: float = 1.0):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
+            last_exception = None
             for attempt in range(max_retries):
                 try:
                     return func(*args, **kwargs)
                 except Exception as e:
+                    last_exception = e
                     if attempt == max_retries - 1:
                         raise
                     
@@ -200,6 +202,10 @@ def retry_on_error(max_retries: int = 3, delay: float = 1.0):
                         f"Reintentando en {delay}s..."
                     )
                     time.sleep(delay)
+            
+            # Si llegamos aquí, todos los reintentos fallaron
+            if last_exception:
+                raise last_exception
             
         return wrapper
     return decorator

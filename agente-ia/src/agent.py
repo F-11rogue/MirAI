@@ -88,15 +88,33 @@ class BaseAgent(ABC):
     
     @classmethod
     def load(cls, path: str, config_path: str = "config/agent_config.yaml"):
-        """Carga un agente guardado"""
+        """
+        Carga un agente guardado.
+        
+        Args:
+            path: Ruta al archivo JSON del agente guardado
+            config_path: Ruta opcional al archivo de configuración
+        
+        Returns:
+            Instancia del agente cargado
+        """
         with open(path, 'r', encoding='utf-8') as f:
             save_data = json.load(f)
         
-        # Crear instancia con config_path y restaurar configuración
+        # Obtener configuración del archivo guardado
+        saved_config = save_data.get('config', {})
+        
+        # Crear instancia con la configuración guardada
+        # Primero intentamos crear el agente con config_path
         agent = cls(config_path)
-        agent.config = save_data.get('config', {})
-        agent.name = save_data.get('name', 'Agent')
-        agent.version = save_data.get('version', '1.0.0')
+        
+        # Luego sobrescribimos con la configuración guardada si existe
+        if saved_config:
+            agent.config = saved_config
+        
+        # Restaurar otros atributos
+        agent.name = save_data.get('name', agent.name)
+        agent.version = save_data.get('version', agent.version)
         
         logger.info(f"Agente cargado desde: {path}")
         return agent
