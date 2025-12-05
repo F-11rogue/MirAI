@@ -1,0 +1,192 @@
+# Configuración del Agente de IA
+# Este archivo define todos los parámetros del agente
+
+agent:
+  name: "MiAgente"
+  type: "conversational"  # Opciones: conversational, classifier, custom
+  version: "1.0.0"
+  description: "Agente de IA para automatizar respuestas y asistencia"
+  
+  # Parámetros del agente
+  parameters:
+    temperature: 0.7          # Creatividad (0.0 = determinista, 1.0 = creativo)
+    max_tokens: 500           # Máximo de tokens por respuesta
+    top_p: 0.9               # Nucleus sampling
+    frequency_penalty: 0.0    # Penalización por repetición
+    presence_penalty: 0.0     # Penalización por temas repetidos
+
+# Configuración del modelo
+model:
+  provider: "openai"          # Opciones: openai, anthropic, huggingface, local
+  model_name: "gpt-3.5-turbo" # Modelo específico a usar
+  
+  # Alternativas comentadas:
+  # provider: "anthropic"
+  # model_name: "claude-3-sonnet-20240229"
+  
+  # provider: "huggingface"
+  # model_name: "meta-llama/Llama-2-7b-chat-hf"
+  
+  fallback_model: "gpt-3.5-turbo"  # Modelo de respaldo si falla el principal
+
+# Configuración de entrenamiento
+training:
+  batch_size: 16
+  epochs: 10
+  learning_rate: 0.001
+  validation_split: 0.15
+  test_split: 0.15
+  
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 3
+    min_delta: 0.001
+  
+  # Optimizador
+  optimizer: "adam"
+  
+  # Scheduler
+  scheduler:
+    type: "step"
+    step_size: 5
+    gamma: 0.1
+
+# Configuración de datos
+data:
+  input_format: "json"        # json, csv, txt
+  max_sequence_length: 512
+  preprocessing:
+    lowercase: false
+    remove_punctuation: false
+    remove_stopwords: false
+    
+  # Augmentación de datos
+  augmentation:
+    enabled: false
+    techniques:
+      - "synonym_replacement"
+      - "back_translation"
+
+# Sistema de prompts
+prompts:
+  system_prompt: |
+    Eres un asistente virtual profesional y amable.
+    Tu objetivo es ayudar a los usuarios con sus consultas de manera clara y concisa.
+    Siempre mantén un tono profesional pero cercano.
+  
+  user_prompt_template: |
+    Usuario: {user_input}
+    
+    Por favor proporciona una respuesta útil y precisa.
+  
+  few_shot_examples:
+    - user: "¿Cuál es el horario de atención?"
+      assistant: "Nuestro horario de atención es de lunes a sábado, de 9:00 AM a 6:00 PM."
+    
+    - user: "¿Cómo puedo agendar una cita?"
+      assistant: "Puedes agendar una cita a través de WhatsApp, nuestro formulario web, o llamando directamente."
+
+# Configuración de memoria y contexto
+memory:
+  type: "buffer"              # buffer, summary, vector
+  max_messages: 10            # Máximo de mensajes a recordar
+  
+  # Para memoria vectorial
+  vector_store:
+    enabled: false
+    provider: "chromadb"      # chromadb, pinecone, weaviate
+    embedding_model: "text-embedding-ada-002"
+
+# Retrieval Augmented Generation (RAG)
+rag:
+  enabled: false
+  knowledge_base_path: "data/knowledge_base/"
+  chunk_size: 500
+  chunk_overlap: 50
+  top_k: 3                    # Número de chunks relevantes a recuperar
+
+# Herramientas y funciones
+tools:
+  enabled: false
+  available_tools:
+    - name: "buscar_disponibilidad"
+      description: "Busca horarios disponibles para citas"
+    
+    - name: "consultar_precio"
+      description: "Consulta el precio de un servicio específico"
+    
+    - name: "enviar_confirmacion"
+      description: "Envía confirmación de cita por email/SMS"
+
+# Validación y filtros
+validation:
+  input_max_length: 1000
+  output_max_length: 2000
+  
+  # Filtro de contenido
+  content_filter:
+    enabled: true
+    blocked_topics:
+      - "contenido_inapropiado"
+    
+  # Validación de respuestas
+  response_validation:
+    min_confidence: 0.7
+    fallback_response: "Lo siento, no estoy seguro de cómo responder a eso. ¿Podrías reformular tu pregunta?"
+
+# Métricas y logging
+metrics:
+  enabled: true
+  track:
+    - "response_time"
+    - "token_usage"
+    - "user_satisfaction"
+    - "conversation_length"
+  
+  save_path: "models/trained/metrics.json"
+
+logging:
+  level: "INFO"               # DEBUG, INFO, WARNING, ERROR
+  format: "json"              # json, text
+  save_conversations: true
+  conversations_path: "logs/conversations/"
+
+# Límites y restricciones
+limits:
+  max_requests_per_minute: 60
+  max_tokens_per_day: 100000
+  
+  # Rate limiting por usuario
+  per_user:
+    max_requests_per_minute: 10
+    max_conversations_per_day: 50
+
+# Configuración de despliegue
+deployment:
+  mode: "development"         # development, staging, production
+  
+  api:
+    host: "0.0.0.0"
+    port: 8000
+    cors_origins:
+      - "http://localhost:3000"
+      - "https://tu-dominio.com"
+  
+  cache:
+    enabled: false
+    provider: "redis"         # redis, memcached
+    ttl: 3600                 # Time to live en segundos
+
+# Experimentos y A/B testing
+experiments:
+  enabled: false
+  
+  variants:
+    - name: "variant_a"
+      temperature: 0.5
+      weight: 50
+    
+    - name: "variant_b"
+      temperature: 0.9
+      weight: 50
