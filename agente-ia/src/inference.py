@@ -190,8 +190,18 @@ def main():
         # Cargar o crear agente
         if args.model:
             logger.info(f"Cargando modelo desde: {args.model}")
-            from agent import BaseAgent
-            agent = BaseAgent.load(os.path.join(args.model, 'agent.json'))
+            # Crear agente según tipo y cargar su configuración
+            agent = create_agent(args.agent_type, args.config)
+            
+            # Cargar el estado guardado si existe
+            model_path = os.path.join(args.model, 'agent.json')
+            if os.path.exists(model_path):
+                with open(model_path, 'r', encoding='utf-8') as f:
+                    import json
+                    save_data = json.load(f)
+                    agent.config = save_data.get('config', agent.config)
+                    agent.name = save_data.get('name', agent.name)
+                logger.info(f"Estado del modelo cargado desde: {model_path}")
         else:
             logger.info(f"Creando nuevo agente tipo: {args.agent_type}")
             agent = create_agent(args.agent_type, args.config)

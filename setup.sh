@@ -25,6 +25,12 @@ echo "✓ Python encontrado: $($PYTHON_CMD --version)"
 echo ""
 
 # Cambiar al directorio del agente
+if [ ! -d "agente-ia" ]; then
+    echo "❌ Error: directorio agente-ia no encontrado"
+    echo "Asegúrate de ejecutar este script desde el directorio raíz del proyecto"
+    exit 1
+fi
+
 cd agente-ia
 
 # Crear entorno virtual si no existe

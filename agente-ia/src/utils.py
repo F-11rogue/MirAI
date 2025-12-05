@@ -234,13 +234,17 @@ def load_env_vars(env_file: str = ".env"):
     Args:
         env_file: Ruta al archivo .env
     """
-    from dotenv import load_dotenv
-    
-    if os.path.exists(env_file):
-        load_dotenv(env_file)
-        logger.info(f"Variables de entorno cargadas desde: {env_file}")
-    else:
-        logger.warning(f"Archivo .env no encontrado: {env_file}")
+    try:
+        from dotenv import load_dotenv
+        
+        if os.path.exists(env_file):
+            load_dotenv(env_file)
+            logger.info(f"Variables de entorno cargadas desde: {env_file}")
+        else:
+            logger.warning(f"Archivo .env no encontrado: {env_file}")
+    except ImportError:
+        logger.warning("python-dotenv no instalado. Instala con: pip install python-dotenv")
+        logger.info("Las variables de entorno del sistema serán usadas.")
 
 
 def get_memory_usage() -> Dict[str, float]:
@@ -250,15 +254,22 @@ def get_memory_usage() -> Dict[str, float]:
     Returns:
         Dict con información de memoria en MB
     """
-    import psutil
-    
-    process = psutil.Process()
-    memory_info = process.memory_info()
-    
-    return {
-        'rss_mb': memory_info.rss / 1024 / 1024,  # Resident Set Size
-        'vms_mb': memory_info.vms / 1024 / 1024,  # Virtual Memory Size
-    }
+    try:
+        import psutil
+        
+        process = psutil.Process()
+        memory_info = process.memory_info()
+        
+        return {
+            'rss_mb': memory_info.rss / 1024 / 1024,  # Resident Set Size
+            'vms_mb': memory_info.vms / 1024 / 1024,  # Virtual Memory Size
+        }
+    except ImportError:
+        logger.warning("psutil no instalado. Instala con: pip install psutil")
+        return {
+            'rss_mb': 0.0,
+            'vms_mb': 0.0,
+        }
 
 
 def setup_logging(

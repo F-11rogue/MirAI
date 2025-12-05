@@ -173,6 +173,11 @@ def main():
     try:
         # Cargar configuración
         logger.info(f"Cargando configuración desde: {args.config}")
+        
+        if not os.path.exists(args.config):
+            logger.error(f"Archivo de configuración no encontrado: {args.config}")
+            sys.exit(1)
+        
         config = load_config(args.config)
         
         # Determinar tipo de agente

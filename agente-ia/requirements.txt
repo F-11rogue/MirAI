@@ -34,6 +34,9 @@ pytest-asyncio>=0.21.0
 # Logging & Monitoring
 loguru>=0.7.0
 
+# System utilities
+psutil>=5.9.0
+
 # Optional: Advanced features
 # sentence-transformers>=2.2.0  # For embeddings
 # chromadb>=0.4.0  # For vector database

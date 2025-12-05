@@ -20,6 +20,13 @@ python --version
 echo.
 
 REM Cambiar al directorio del agente
+if not exist "agente-ia" (
+    echo ❌ Error: directorio agente-ia no encontrado
+    echo Asegúrate de ejecutar este script desde el directorio raíz del proyecto
+    pause
+    exit /b 1
+)
+
 cd agente-ia
 
 REM Crear entorno virtual si no existe
