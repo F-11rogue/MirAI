@@ -1,0 +1,238 @@
+# Configuración específica del modelo
+# Para diferentes tipos de modelos y arquitecturas
+
+# Configuración para modelos LLM (OpenAI, Anthropic, etc.)
+llm:
+  openai:
+    api_version: "v1"
+    organization_id: null
+    timeout: 30
+    max_retries: 3
+    
+    models:
+      gpt-4:
+        context_window: 8192
+        cost_per_1k_tokens:
+          input: 0.03
+          output: 0.06
+      
+      gpt-3.5-turbo:
+        context_window: 4096
+        cost_per_1k_tokens:
+          input: 0.0015
+          output: 0.002
+  
+  anthropic:
+    api_version: "2023-06-01"
+    timeout: 30
+    max_retries: 3
+    
+    models:
+      claude-3-opus:
+        context_window: 200000
+        cost_per_1k_tokens:
+          input: 0.015
+          output: 0.075
+      
+      claude-3-sonnet:
+        context_window: 200000
+        cost_per_1k_tokens:
+          input: 0.003
+          output: 0.015
+
+# Configuración para modelos de Hugging Face
+huggingface:
+  cache_dir: "models/cache/"
+  device: "auto"              # auto, cpu, cuda
+  
+  text_generation:
+    model_name: "meta-llama/Llama-2-7b-chat-hf"
+    max_length: 512
+    num_beams: 4
+    do_sample: true
+    temperature: 0.7
+    top_k: 50
+    top_p: 0.9
+  
+  embeddings:
+    model_name: "sentence-transformers/all-MiniLM-L6-v2"
+    batch_size: 32
+
+# Configuración para modelos clásicos de ML
+classical_ml:
+  sklearn:
+    # Clasificador
+    classifier:
+      type: "RandomForestClassifier"
+      params:
+        n_estimators: 100
+        max_depth: 10
+        random_state: 42
+    
+    # Regressor
+    regressor:
+      type: "GradientBoostingRegressor"
+      params:
+        n_estimators: 100
+        learning_rate: 0.1
+        max_depth: 5
+        random_state: 42
+    
+    # Feature engineering
+    vectorizer:
+      type: "TfidfVectorizer"
+      params:
+        max_features: 5000
+        ngram_range: [1, 2]
+        min_df: 2
+
+# Configuración para modelos de Deep Learning
+deep_learning:
+  pytorch:
+    device: "cuda"            # cuda, cpu, mps
+    precision: "float32"      # float32, float16, bfloat16
+    
+    # Arquitectura de red neuronal
+    architecture:
+      type: "transformer"     # transformer, lstm, gru, cnn
+      
+      # Transformer config
+      transformer:
+        num_layers: 6
+        num_heads: 8
+        hidden_size: 512
+        intermediate_size: 2048
+        dropout: 0.1
+        activation: "gelu"
+      
+      # LSTM config
+      lstm:
+        num_layers: 2
+        hidden_size: 256
+        dropout: 0.2
+        bidirectional: true
+    
+    # Optimización
+    optimizer:
+      type: "AdamW"
+      params:
+        lr: 0.0001
+        betas: [0.9, 0.999]
+        eps: 1.0e-08
+        weight_decay: 0.01
+    
+    # Learning rate scheduler
+    scheduler:
+      type: "CosineAnnealingLR"
+      params:
+        T_max: 10
+        eta_min: 0.00001
+
+# Configuración para Fine-tuning
+fine_tuning:
+  method: "full"              # full, lora, qlora, prefix_tuning
+  
+  # LoRA parameters
+  lora:
+    r: 8                      # Rank
+    lora_alpha: 16
+    lora_dropout: 0.05
+    target_modules:
+      - "q_proj"
+      - "v_proj"
+    bias: "none"              # none, all, lora_only
+  
+  # Training parameters
+  training:
+    num_train_epochs: 3
+    per_device_train_batch_size: 4
+    gradient_accumulation_steps: 4
+    warmup_steps: 100
+    
+    # Mixed precision
+    fp16: false
+    bf16: true
+    
+    # Gradient clipping
+    max_grad_norm: 1.0
+    
+    # Checkpointing
+    save_steps: 500
+    save_total_limit: 3
+    load_best_model_at_end: true
+
+# Configuración de embeddings
+embeddings:
+  provider: "openai"          # openai, huggingface, cohere
+  
+  openai:
+    model: "text-embedding-ada-002"
+    dimensions: 1536
+  
+  huggingface:
+    model: "sentence-transformers/all-mpnet-base-v2"
+    dimensions: 768
+  
+  # Cache de embeddings
+  cache:
+    enabled: true
+    max_size: 10000
+
+# Configuración de base de datos vectorial
+vector_db:
+  provider: "chromadb"        # chromadb, pinecone, weaviate, faiss
+  
+  chromadb:
+    persist_directory: "data/vector_store/"
+    collection_name: "knowledge_base"
+    
+  pinecone:
+    environment: "us-west1-gcp"
+    index_name: "agent-index"
+    dimension: 1536
+  
+  search:
+    similarity_metric: "cosine"  # cosine, euclidean, dot_product
+    top_k: 5
+
+# Cuantización (para reducir tamaño del modelo)
+quantization:
+  enabled: false
+  method: "dynamic"           # dynamic, static, qat
+  
+  bits: 8                     # 4, 8
+  scheme: "asymmetric"        # symmetric, asymmetric
+
+# Inferencia optimizada
+inference:
+  # Batching
+  batch_inference:
+    enabled: true
+    max_batch_size: 32
+    timeout_ms: 100
+  
+  # Caching
+  cache_responses:
+    enabled: true
+    ttl: 3600
+    max_entries: 1000
+  
+  # Compilación
+  compile_model:
+    enabled: false
+    backend: "inductor"       # inductor, aot_autograd
+
+# Monitoreo del modelo
+monitoring:
+  # Drift detection
+  drift_detection:
+    enabled: false
+    method: "ks_test"         # ks_test, chi2, js_divergence
+    threshold: 0.05
+  
+  # Performance tracking
+  performance:
+    track_latency: true
+    track_throughput: true
+    track_memory: true
+    alert_threshold_ms: 1000
